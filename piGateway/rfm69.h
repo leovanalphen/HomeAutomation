@@ -4,6 +4,7 @@
 // Copyright Felix Rusu (2014), felix@lowpowerlab.com
 // http://lowpowerlab.com/
 // Raspberry Pi port by Alexandre Bouillot (2014-2015) @abouillot on twitter
+// Update for Linux (Pi and Odroid) by AcE Krystal (2016)
 // **********************************************************************************
 // License
 // **********************************************************************************
@@ -123,7 +124,6 @@ class RFM69 {
     }
 
     bool initialize(uint8_t freqBand, uint8_t ID, uint8_t networkID=1);
-    bool restart(uint8_t freqBand, uint8_t ID, uint8_t networkID=1);
     void setAddress(uint8_t addr);
     void setNetwork(uint8_t networkID);
     bool canSend();
@@ -154,6 +154,7 @@ class RFM69 {
     static void isr0();
     void virtual interruptHandler();
     virtual void interruptHook(uint8_t CTLbyte) {};
+    static volatile bool _inISR;
     virtual void sendFrame(uint8_t toAddress, const void* buffer, uint8_t size, bool requestACK=false, bool sendACK=false);
 
     static RFM69* selfPointer;
@@ -164,14 +165,17 @@ class RFM69 {
     bool _promiscuousMode;
     uint8_t _powerLevel;
     bool _isRFM69HW;
+#if defined (SPCR) && defined (SPSR)
     uint8_t _SPCR;
     uint8_t _SPSR;
+#endif
 
     virtual void receiveBegin();
     virtual void setMode(uint8_t mode);
     virtual void setHighPowerRegs(bool onOff);
     virtual void select();
     virtual void unselect();
+    inline void maybeInterrupts();
 };
 
 #endif
