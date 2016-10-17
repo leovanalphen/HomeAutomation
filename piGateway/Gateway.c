@@ -330,7 +330,7 @@ static int run_loop(struct mosquitto *m) {
 }
 
 static int initRfm(RFM69 *rfm) {
-	rfm->restart(theConfig.frequency,theConfig.nodeId,theConfig.networkId);
+	rfm->initialize(theConfig.frequency,theConfig.nodeId,theConfig.networkId);
 	if (theConfig.isRFM69HW)
 		rfm->setHighPower(); //uncomment only for RFM69HW!
 	if (theConfig.keyLength)

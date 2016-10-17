@@ -4,7 +4,7 @@
 // Copyright Felix Rusu (2014), felix@lowpowerlab.com
 // http://lowpowerlab.com/
 // Raspberry Pi port by Alexandre Bouillot (2014-2015) @abouillot on twitter
-// Update for Linux (Pi and Odroid) by AcE Krystal (2016)
+// Update for Linux (Pi and Odroid) by AcE Krystal (2016) ace_krystal on skype
 // **********************************************************************************
 // License
 // **********************************************************************************
